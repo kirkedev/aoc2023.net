@@ -1,7 +1,7 @@
 namespace day2;
 
 public static class Day2
-{ 
+{
     public static Round ParseRound(string round)
     {
         var cubes = round.Split(", ")
@@ -13,14 +13,14 @@ public static class Day2
             .ToDictionary();
 
         return new Round(
-            red: cubes.GetValueOrDefault("red"), 
-            green: cubes.GetValueOrDefault("green"), 
+            red: cubes.GetValueOrDefault("red"),
+            green: cubes.GetValueOrDefault("green"),
             blue: cubes.GetValueOrDefault("blue"));
     }
 
     public static Func<Game, bool> IsValid(Round totals)
     {
-        return game => game.Rounds.All(round => 
+        return game => game.Rounds.All(round =>
             round.Red <= totals.Red && round.Green <= totals.Green && round.Blue <= totals.Blue);
     }
 
@@ -30,7 +30,7 @@ public static class Day2
         var id = game[0].Split(' ')[1];
         var rounds = game[1].Split("; ").Select(ParseRound).ToArray();
 
-        return new Game(id: int.Parse(id), rounds: rounds);
+        return new Game(int.Parse(id), rounds);
     }
 
     public static Round Minimums(this Game game)
@@ -38,11 +38,11 @@ public static class Day2
         return new Round(
             red: game.Rounds.Max(round => round.Red),
             green: game.Rounds.Max(round => round.Green),
-            blue: game.Rounds.Max(round => round.Blue));   
+            blue: game.Rounds.Max(round => round.Blue));
     }
 
     public static int Power(this Round round)
     {
-        return round.Red * round.Green * round.Blue; 
+        return round.Red * round.Green * round.Blue;
     }
 }
