@@ -42,7 +42,7 @@ public static class Day2Tests
         var isValid = games.Where(Day2.IsValid(new Round(red: 12, green: 13, blue: 14))).ToList();
         
         Assert.That(isValid, Has.Count.EqualTo(3));
-        Assert.That(isValid.Select(game => game.Id).Sum(), Is.EqualTo(8));
+        Assert.That(isValid.Sum(game => game.Id), Is.EqualTo(8));
     }
 
     [Test]
