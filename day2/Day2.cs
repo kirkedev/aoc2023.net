@@ -1,5 +1,9 @@
 namespace day2;
 
+public readonly record struct Round(int Red, int Green, int Blue);
+
+public readonly record struct Game(int Id, Round[] Rounds);
+
 public static class Day2
 {
     public static Round ParseRound(string round)
@@ -13,9 +17,9 @@ public static class Day2
             .ToDictionary();
 
         return new Round(
-            red: cubes.GetValueOrDefault("red"),
-            green: cubes.GetValueOrDefault("green"),
-            blue: cubes.GetValueOrDefault("blue"));
+            Red: cubes.GetValueOrDefault("red"),
+            Green: cubes.GetValueOrDefault("green"),
+            Blue: cubes.GetValueOrDefault("blue"));
     }
 
     public static Func<Game, bool> IsValid(Round totals)
@@ -36,9 +40,9 @@ public static class Day2
     public static Round Minimums(this Game game)
     {
         return new Round(
-            red: game.Rounds.Max(round => round.Red),
-            green: game.Rounds.Max(round => round.Green),
-            blue: game.Rounds.Max(round => round.Blue));
+            Red: game.Rounds.Max(round => round.Red),
+            Green: game.Rounds.Max(round => round.Green),
+            Blue: game.Rounds.Max(round => round.Blue));
     }
 
     public static int Power(this Round round)

@@ -17,7 +17,7 @@ public static class Day1
         { "nine", 9 }
     };
 
-    public static (int, int) GetNumbers(string line)
+    public static int GetNumbers(string line)
     {
         var values = line
             .Select(input => int.TryParse(input.ToString(), out var value) ? value : Optional<int>.None)
@@ -25,15 +25,15 @@ public static class Day1
             .Select(value => value.Value)
             .ToList();
 
-        return (values.First(), values.Last());
+        return Calibrate(values.First(), values.Last());
     }
 
-    public static (int, int) GetTextNumbers(string line)
+    public static int GetTextNumbers(string line)
     {
         var values = line
             .Select((input, index) =>
             {
-                var text = line.Substring(index);
+                var text = line[index..];
                 var key = Numbers.Keys.FirstOrDefault(key => text.StartsWith(key));
 
                 return key == null
@@ -44,11 +44,11 @@ public static class Day1
             .Select(value => value.Value)
             .ToList();
 
-        return (values.First(), values.Last());
+        return Calibrate(values.First(), values.Last());
     }
 
-    public static int Calibrate((int first, int last) input)
+    public static int Calibrate(int first, int last)
     {
-        return input.first * 10 + input.last;
+        return first * 10 + last;
     }
 }
