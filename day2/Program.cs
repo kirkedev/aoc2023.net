@@ -3,7 +3,7 @@ using day2;
 
 var part1 = File.ReadLines("day2/input")
     .Select(Day2.ParseGame)
-    .Where(Day2.IsValid(new Round(12, 13, 14)))
+    .Where(Day2.IsValid(new Round(red: 12, green: 13, blue: 14)))
     .Sum(game => game.Id);
 
 Console.WriteLine(part1);
