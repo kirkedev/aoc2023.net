@@ -21,6 +21,10 @@ public static class Day3Tests
                              """;
 
         var schematic = new Schematic(input.Split(Environment.NewLine));
+        Assert.That(schematic.Boundary.Left, Is.EqualTo(0));
+        Assert.That(schematic.Boundary.Top, Is.EqualTo(0));
+        Assert.That(schematic.Boundary.Right, Is.EqualTo(9));
+        Assert.That(schematic.Boundary.Bottom, Is.EqualTo(9));
 
         Assert.That(schematic.GetNumbers().ToArray(), Is.EquivalentTo(new Entry[]
         {
@@ -73,6 +77,14 @@ public static class Day3Tests
         Assert.That(Day3.IsSymbol('#'));
         Assert.That(Day3.IsSymbol('.'), Is.False);
         Assert.That(Day3.IsSymbol('1'), Is.False);
+    }
+
+    [Test]
+    public static void TestIsAdjacent()
+    {
+        Assert.That((1, 1).IsAdjacentTo((2, 2)));
+        Assert.That((0, 0).IsAdjacentTo((2, 2)), Is.False);
+        Assert.That((2, 2).IsAdjacentTo((1, 1)));
     }
 
     [Test]
