@@ -80,14 +80,6 @@ public static class Day3Tests
     }
 
     [Test]
-    public static void TestIsAdjacent()
-    {
-        Assert.That((1, 1).IsAdjacentTo((2, 2)));
-        Assert.That((0, 0).IsAdjacentTo((2, 2)), Is.False);
-        Assert.That((2, 2).IsAdjacentTo((1, 1)));
-    }
-
-    [Test]
     public static void TestGetBorderPoints()
     {
         var box = new BoundaryBox(Bottom: 9, Right: 9);

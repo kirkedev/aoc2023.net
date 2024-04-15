@@ -14,9 +14,6 @@ public static class Day3
     public static bool IsSymbol(char entry) =>
         entry != '.' && !char.IsNumber(entry);
 
-    public static bool IsAdjacentTo(this Point point, Point other) =>
-        Math.Abs(point.Item1 - other.Item1) <= 1 && Math.Abs(point.Item2 - other.Item2) <= 1;
-
     public static BoundaryBox GetBorders(this Entry entry) => new(
         Left: entry.Left - 1,
         Top: entry.Top - 1,
