@@ -7,8 +7,9 @@ public static class Day4Tests
     [Test]
     public static void TestParse()
     {
-        var (winners, numbers) = Card.Parse("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53");
+        var (id, winners, numbers) = Card.Parse("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53");
 
+        Assert.That(id, Is.EqualTo(1));
         Assert.That(winners, Is.EquivalentTo(new[] { 41, 48, 83, 86, 17 }));
         Assert.That(numbers, Is.EquivalentTo(new[] { 83, 86, 6, 31, 17, 9, 48, 53 }));
     }
