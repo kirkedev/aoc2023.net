@@ -2,10 +2,7 @@ namespace day3;
 
 using Point = (int, int);
 
-public readonly record struct Entry(int Left, int Top, string Contents)
-{
-    public Point Location => (Left, Top);
-}
+public readonly record struct Entry(int Left, int Top, string Contents);
 
 public readonly record struct BoundaryBox(int Left = 0, int Top = 0, int Right = 0, int Bottom = 0);
 
@@ -13,6 +10,9 @@ public static class Day3
 {
     public static bool IsSymbol(char entry) =>
         entry != '.' && !char.IsNumber(entry);
+
+    public static Point Location(this Entry entry) =>
+        (entry.Left, entry.Top);
 
     public static BoundaryBox GetBorders(this Entry entry) => new(
         Left: entry.Left - 1,

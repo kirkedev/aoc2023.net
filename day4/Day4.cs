@@ -2,7 +2,7 @@ namespace day4;
 
 public readonly record struct Card(int[] Winners, int[] Numbers)
 {
-    public static Card From(string input)
+    public static Card Parse(string input)
     {
         var card = input.Split(": ");
 
@@ -21,9 +21,6 @@ public readonly record struct Card(int[] Winners, int[] Numbers)
 
 public static class Day4
 {
-    public static int Score(this int[] numbers) =>
-        numbers.Length == 0 ? 0 : (int)Math.Pow(2, numbers.Length - 1);
-
     public static int Score(this IEnumerable<int> numbers) =>
-        Score(numbers.ToArray());
+        (int)Math.Pow(2, numbers.Count() - 1);
 }

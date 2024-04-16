@@ -20,13 +20,13 @@ public static class Day3Tests
                              .664.598..
                              """;
 
-        var schematic = new Schematic(input.Split(Environment.NewLine));
+        var schematic = Schematic.Parse(input.Split(Environment.NewLine));
         Assert.That(schematic.Boundary.Left, Is.EqualTo(0));
         Assert.That(schematic.Boundary.Top, Is.EqualTo(0));
         Assert.That(schematic.Boundary.Right, Is.EqualTo(9));
         Assert.That(schematic.Boundary.Bottom, Is.EqualTo(9));
 
-        Assert.That(schematic.GetNumbers().ToArray(), Is.EquivalentTo(new Entry[]
+        Assert.That(schematic.Numbers().ToArray(), Is.EquivalentTo(new Entry[]
         {
             new(Top: 0, Left: 0, Contents: "467"),
             new(Top: 0, Left: 5, Contents: "114"),
@@ -57,9 +57,9 @@ public static class Day3Tests
                              .664.598..
                              """;
 
-        var schematic = new Schematic(input.Split(Environment.NewLine));
+        var schematic = Schematic.Parse(input.Split(Environment.NewLine));
 
-        Assert.That(schematic.GetSymbols().ToArray(), Is.EquivalentTo(new Entry[]
+        Assert.That(schematic.Symbols().ToArray(), Is.EquivalentTo(new Entry[]
         {
             new(Top: 1, Left: 3, Contents: "*"),
             new(Top: 3, Left: 6, Contents: "#"),

@@ -7,15 +7,15 @@ public static class Day2Tests
     [Test]
     public static void TestParseRound()
     {
-        Assert.That(Day2.ParseRound("1 blue, 2 green"), Is.EqualTo(new Round(Red: 0, Green: 2, Blue: 1)));
-        Assert.That(Day2.ParseRound("3 green, 4 blue, 1 red"), Is.EqualTo(new Round(Red: 1, Green: 3, Blue: 4)));
-        Assert.That(Day2.ParseRound("1 green, 1 blue"), Is.EqualTo(new Round(Red: 0, Green: 1, Blue: 1)));
+        Assert.That(Round.Parse("1 blue, 2 green"), Is.EqualTo(new Round(Red: 0, Green: 2, Blue: 1)));
+        Assert.That(Round.Parse("3 green, 4 blue, 1 red"), Is.EqualTo(new Round(Red: 1, Green: 3, Blue: 4)));
+        Assert.That(Round.Parse("1 green, 1 blue"), Is.EqualTo(new Round(Red: 0, Green: 1, Blue: 1)));
     }
 
     [Test]
     public static void TestParse()
     {
-        var game = Day2.ParseGame("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green");
+        var game = Game.Parse("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green");
         Assert.That(game.Id, Is.EqualTo(1));
 
         Assert.That(game.Rounds, Is.EquivalentTo(new Round[]
@@ -38,7 +38,7 @@ public static class Day2Tests
                              """;
 
         var games = input.Split(Environment.NewLine)
-            .Select(Day2.ParseGame)
+            .Select(Game.Parse)
             .Where(Day2.IsValid(new Round(Red: 12, Green: 13, Blue: 14)))
             .ToList();
 
@@ -49,21 +49,21 @@ public static class Day2Tests
     [Test]
     public static void TestMinimums()
     {
-        Assert.That(Day2.ParseGame("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green").Minimums(),
+        Assert.That(Game.Parse("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green").Minimums(),
             Is.EqualTo(new Round(Red: 4, Green: 2, Blue: 6)));
 
-        Assert.That(Day2.ParseGame("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue").Minimums(),
+        Assert.That(Game.Parse("Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue").Minimums(),
             Is.EqualTo(new Round(Red: 1, Green: 3, Blue: 4)));
 
         Assert.That(
-            Day2.ParseGame("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red").Minimums(),
+            Game.Parse("Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red").Minimums(),
             Is.EqualTo(new Round(Red: 20, Green: 13, Blue: 6)));
 
         Assert.That(
-            Day2.ParseGame("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red").Minimums(),
+            Game.Parse("Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red").Minimums(),
             Is.EqualTo(new Round(Red: 14, Green: 3, Blue: 15)));
 
-        Assert.That(Day2.ParseGame("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green").Minimums(),
+        Assert.That(Game.Parse("Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green").Minimums(),
             Is.EqualTo(new Round(Red: 6, Green: 3, Blue: 2)));
     }
 

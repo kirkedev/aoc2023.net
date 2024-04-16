@@ -1,14 +1,10 @@
 namespace day2;
 
-public readonly record struct Round(int Red, int Green, int Blue);
-
-public readonly record struct Game(int Id, Round[] Rounds);
-
-public static class Day2
+public readonly record struct Round(int Red, int Green, int Blue)
 {
-    public static Round ParseRound(string round)
+    public static Round Parse(string input)
     {
-        var cubes = round.Split(", ")
+        var cubes = input.Split(", ")
             .Select(cubes =>
             {
                 var cube = cubes.Split(" ");
@@ -21,32 +17,31 @@ public static class Day2
             Green: cubes.GetValueOrDefault("green"),
             Blue: cubes.GetValueOrDefault("blue"));
     }
+}
 
-    public static Func<Game, bool> IsValid(Round totals)
+public readonly record struct Game(int Id, Round[] Rounds)
+{
+    public static Game Parse(string input)
     {
-        return game => game.Rounds.All(round =>
-            round.Red <= totals.Red && round.Green <= totals.Green && round.Blue <= totals.Blue);
-    }
-
-    public static Game ParseGame(string line)
-    {
-        var game = line.Split(": ");
+        var game = input.Split(": ");
         var id = game[0].Split(' ')[1];
-        var rounds = game[1].Split("; ").Select(ParseRound).ToArray();
+        var rounds = game[1].Split("; ").Select(Round.Parse).ToArray();
 
         return new Game(int.Parse(id), rounds);
     }
+}
 
-    public static Round Minimums(this Game game)
-    {
-        return new Round(
-            Red: game.Rounds.Max(round => round.Red),
-            Green: game.Rounds.Max(round => round.Green),
-            Blue: game.Rounds.Max(round => round.Blue));
-    }
+public static class Day2
+{
+    public static Func<Game, bool> IsValid(Round totals) =>
+        game => game.Rounds.All(round =>
+            round.Red <= totals.Red && round.Green <= totals.Green && round.Blue <= totals.Blue);
 
-    public static int Power(this Round round)
-    {
-        return round.Red * round.Green * round.Blue;
-    }
+    public static Round Minimums(this Game game) => new(
+        Red: game.Rounds.Max(round => round.Red),
+        Green: game.Rounds.Max(round => round.Green),
+        Blue: game.Rounds.Max(round => round.Blue));
+
+    public static int Power(this Round round) =>
+        round.Red * round.Green * round.Blue;
 }
